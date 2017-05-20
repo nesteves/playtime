@@ -20,3 +20,7 @@
 *.swp
 
 .env
+
+# Terraform files
+terraform.tfstate.backup
+.terraform/

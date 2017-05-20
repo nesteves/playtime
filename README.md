@@ -44,3 +44,18 @@ Copy .env.sample to .env and then follow the instructions below.
 * AWS_ACCESS_KEY: For Amazon search
 * AWS_SECRET_KEY: For Amazon search
 * AWS_ASSOCIATES_TAG: For generating affiliate links from search
+
+### Heroku Configuration
+
+**Dependencies:**
++ Terraform (http://terraform.io)
++ AWS account
++ S3 bucket (Terraform statefile)
++ Heroku cli (https://devcenter.heroku.com/articles/heroku-cli)
+
+```
+$ cd terraform
+$ ./run terraform plan
+$ ./run terraform apply
+$ git push heroku master
+```

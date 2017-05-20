@@ -1,0 +1,14 @@
+#!/bin/bash
+
+: ${AWS_PROFILE:?"Please set desired AWS Profile"}
+
+which terraform >/dev/null
+if [ $? -eq 1 ]; then
+  echo "Please install Hashicorp Terraform: https://www.terraform.io/"
+  exit 1
+fi
+
+# Initialize the backend
+terraform init -backend-config backend.hcl
+
+exec terraform "$@"
