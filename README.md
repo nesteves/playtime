@@ -1,4 +1,4 @@
-# Homeless Children's Playtime Project
+# Homeless Children's Playtime Project ![](https://travis-ci.org/rubyforgood/playtime.svg?branch=master)
 
 ## About
 
