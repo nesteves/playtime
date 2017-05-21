@@ -46,6 +46,119 @@ resource "heroku_addon" "database" {
   plan = "heroku-postgresql:hobby-dev"
 }
 
+resource "aws_iam_user" "playtime" {
+  name = "playtime"
+}
+
+data "aws_iam_policy_document" "aws_product_api" {
+  statement {
+    sid    = "awsProductApi"
+    effect = "Allow"
+
+    not_actions = [
+      "acm:*",
+      "apigateway:*",
+      "application-autoscaling:*",
+      "appstream:*",
+      "autoscaling:*",
+      "aws-marketplace:*",
+      "aws-portal:*",
+      "batch:*",
+      "clouddirectory:*",
+      "cloudformation:*",
+      "cloudfront:*",
+      "cloudhsm:*",
+      "cloudsearch:*",
+      "cloudtrail:*",
+      "cloudwatch:*",
+      "codebuild:*",
+      "codecommit:*",
+      "codedeploy:*",
+      "codepipeline:*",
+      "codestar:*",
+      "cognito-identity:*",
+      "cognito-sync:*",
+      "config:*",
+      "connect:*",
+      "datapipeline:*",
+      "devicefarm:*",
+      "directconnect:*",
+      "discovery:*",
+      "dms:*",
+      "ds:*",
+      "dynamodb:*",
+      "ec2:*",
+      "ecr:*",
+      "ecs:*",
+      "elasticache:*",
+      "elasticbeanstalk:*",
+      "elasticfilesystem:*",
+      "elasticloadbalancing:*",
+      "elasticmapreduce:*",
+      "elastictranscoder:*",
+      "es:*",
+      "events:*",
+      "execute-api:*",
+      "firehose:*",
+      "gamelift:*",
+      "glacier:*",
+      "health:*",
+      "iam:*",
+      "importexport:*",
+      "inspector:*",
+      "iot:*",
+      "kinesis:*",
+      "kms:*",
+      "lambda:*",
+      "lightsail:*",
+      "logs:*",
+      "machinelearning:*",
+      "mechanicalturk:*",
+      "mobileanalytics:*",
+      "mobilehub:*",
+      "mobiletargeting:*",
+      "opsworks:*",
+      "organizations:*",
+      "polly:*",
+      "rds:*",
+      "redshift:*",
+      "rekognition:*",
+      "route53:*",
+      "route53domains:*",
+      "s3:*",
+      "sdb:*",
+      "ses:*",
+      "shield:*",
+      "sns:*",
+      "sqs:*",
+      "ssm:*",
+      "states:*",
+      "storagegateway:*",
+      "sts:*",
+      "support:*",
+      "swf:*",
+      "trustedadvisor:*",
+      "waf-regional:*",
+      "waf:*",
+      "wam:*",
+      "workdocs:*",
+      "workmail:*",
+      "workspaces:*",
+      "xray:*",
+    ]
+
+    resources = [
+      "*",
+    ]
+  }
+}
+
+resource "aws_iam_user_policy" "aws_product_api" {
+  name   = "playtime"
+  user   = "${aws_iam_user.playtime.name}"
+  policy = "${data.aws_iam_policy_document.aws_product_api.json}"
+}
+
 output "heroku_app_id" {
   value = "${heroku_app.playtime.id}"
 }
