@@ -11,4 +11,5 @@ fi
 # Initialize the backend
 terraform init -backend-config backend.hcl
 
+source ../.env
 exec terraform "$@"

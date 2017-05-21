@@ -12,9 +12,15 @@ provider "heroku" {
   api_key = "${var.heroku_api_key}"
 }
 
+variable "amazon_client_id" {}
+variable "amazon_client_secret" {}
+variable "aws_access_key" {}
+variable "aws_secret_key" {}
+
 variable "heroku_email" {
   type        = "string"
   description = "The email address associated with the Heroku account in use"
+  default     = "jason@wieringa.io"
 }
 
 variable "heroku_api_key" {
@@ -25,6 +31,7 @@ variable "heroku_api_key" {
 variable "aws_profile" {
   type        = "string"
   description = "The AWS profile which contains credentials to store state in S3"
+  default     = "playtime"
 }
 
 resource "heroku_app" "playtime" {
@@ -32,8 +39,13 @@ resource "heroku_app" "playtime" {
   region = "us"
 
   config_vars {
-    RAILS_ENV = "production"
-    PORT      = 80
+    RAILS_ENV            = "production"
+    PORT                 = 80
+    AMAZON_CLIENT_ID     = "${var.amazon_client_id}"
+    AMAZON_CLIENT_SECRET = "${var.amazon_client_secret}"
+    AWS_ACCESS_KEY       = "${var.aws_access_key}"
+    AWS_SECRET_KEY       = "${var.aws_secret_key}"
+    AWS_ASSOCIATES_TAG   = "playtim009-20"
   }
 
   buildpacks = [
